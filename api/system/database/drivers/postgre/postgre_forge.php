@@ -158,7 +158,7 @@ class CI_DB_postgre_forge extends CI_DB_forge {
 					$sql .= ' NOT NULL';
 				}
 
-				// Added new attribute to create unqite fields. Also works with MySQL
+				// Added new attribute to create unqite fields. Also works with mysql
 				if (array_key_exists('UNIQUE', $attributes) && $attributes['UNIQUE'] === TRUE)
 				{
 					$sql .= ' UNIQUE';
