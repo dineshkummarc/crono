@@ -117,7 +117,7 @@ class CI_DB_cubrid_forge extends CI_DB_forge {
 				{
 					//$sql .= ' UNSIGNED';
 					// As of version 8.4.0 CUBRID does not support UNSIGNED INTEGER data type.
-					// Will be supported in the next release as a part of MySQL Compatibility.
+					// Will be supported in the next release as a part of mysql Compatibility.
 				}
 
 				if (array_key_exists('DEFAULT', $attributes))
