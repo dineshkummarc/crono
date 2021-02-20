@@ -64,11 +64,11 @@ if ( ! function_exists('now'))
 // ------------------------------------------------------------------------
 
 /**
- * Convert MySQL Style Datecodes
+ * Convert mysql Style Datecodes
  *
  * This function is identical to PHPs date() function,
  * except that it allows date codes to be formatted using
- * the MySQL style, where each code letter is preceded
+ * the mysql style, where each code letter is preceded
  * with a percent sign:  %Y %m %d etc...
  *
  * The benefit of doing dates this way is that you don't
@@ -347,7 +347,7 @@ if ( ! function_exists('gmt_to_local'))
 // ------------------------------------------------------------------------
 
 /**
- * Converts a MySQL Timestamp to Unix
+ * Converts a mysql Timestamp to Unix
  *
  * @access	public
  * @param	integer Unix timestamp
@@ -358,7 +358,7 @@ if ( ! function_exists('mysql_to_unix'))
 	function mysql_to_unix($time = '')
 	{
 		// We'll remove certain characters for backward compatibility
-		// since the formatting changed with MySQL 4.1
+		// since the formatting changed with mysql 4.1
 		// YYYY-MM-DD HH:MM:SS
 
 		$time = str_replace('-', '', $time);
