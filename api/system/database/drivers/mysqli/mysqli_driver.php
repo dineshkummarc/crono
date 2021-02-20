@@ -35,7 +35,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	// The character used for escaping
 	var $_escape_char = '`';
 
-	// clause and character used for LIKE escape sequences - not used in MySQL
+	// clause and character used for LIKE escape sequences - not used in mysql
 	var $_like_escape_str = '';
 	var $_like_escape_chr = '';
 
@@ -48,7 +48,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	var $_random_keyword = ' RAND()'; // database specific random keyword
 
 	/**
-	 * Whether to use the MySQL "delete hack" which allows the number
+	 * Whether to use the mysql "delete hack" which allows the number
 	 * of affected rows to be shown. Uses a preg_replace when enabled,
 	 * adding a bit more processing to all queries.
 	 */
@@ -137,7 +137,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	{
 		if ( ! isset($this->use_set_names))
 		{
-			// mysqli_set_charset() requires MySQL >= 5.0.7, use SET NAMES as fallback
+			// mysqli_set_charset() requires mysql >= 5.0.7, use SET NAMES as fallback
 			$this->use_set_names = (version_compare(mysqli_get_server_info($this->conn_id), '5.0.7', '>=')) ? FALSE : TRUE;
 		}
 
@@ -315,9 +315,9 @@ class CI_DB_mysqli_driver extends CI_DB {
 		{
 			$str = mysqli_real_escape_string($this->conn_id, $str);
 		}
-		elseif (function_exists('mysql_escape_string'))
+		elseif (function_exists('mysqli_real_escape_string'))
 		{
-			$str = mysql_escape_string($str);
+			$str = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $str) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 		}
 		else
 		{
