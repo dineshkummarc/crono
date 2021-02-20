@@ -37,11 +37,11 @@
 // The following values will probably need to be changed.
 $db['default']['username'] = "root";
 $db['default']['password'] = "";
-$db['default']['database'] = "crono";
+$db['default']['database'] = "cronoDB";
 
 // The following values can probably stay the same.
 $db['default']['hostname'] = "localhost";
-$db['default']['dbdriver'] = "mysql";
+$db['default']['dbdriver'] = "mysqli";
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
