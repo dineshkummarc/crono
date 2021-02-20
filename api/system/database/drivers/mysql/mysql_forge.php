@@ -16,7 +16,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * MySQL Forge Class
+ * mysql Forge Class
  *
  * @category	Database
  * @author		ExpressionEngine Dev Team
