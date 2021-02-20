@@ -16,7 +16,7 @@
 // --------------------------------------------------------------------
 
 /**
- * MySQL Result Class
+ * mysql Result Class
  *
  * This class extends the parent result class: CI_DB_result
  *
@@ -34,7 +34,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	function num_rows()
 	{
-		return @mysql_num_rows($this->result_id);
+		return @mysqli_num_rows($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -47,7 +47,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	function num_fields()
 	{
-		return @mysql_num_fields($this->result_id);
+		return @(($___mysqli_tmp = mysqli_num_fields($this->result_id)) ? $___mysqli_tmp : false);
 	}
 
 	// --------------------------------------------------------------------
@@ -63,7 +63,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	function list_fields()
 	{
 		$field_names = array();
-		while ($field = mysql_fetch_field($this->result_id))
+		while ($field = (((($___mysqli_tmp = mysqli_fetch_field_direct($this->result_id, mysqli_field_tell($this->result_id))) && is_object($___mysqli_tmp)) ? ( (!is_null($___mysqli_tmp->primary_key = ($___mysqli_tmp->flags & MYSQLI_PRI_KEY_FLAG) ? 1 : 0)) && (!is_null($___mysqli_tmp->multiple_key = ($___mysqli_tmp->flags & MYSQLI_MULTIPLE_KEY_FLAG) ? 1 : 0)) && (!is_null($___mysqli_tmp->unique_key = ($___mysqli_tmp->flags & MYSQLI_UNIQUE_KEY_FLAG) ? 1 : 0)) && (!is_null($___mysqli_tmp->numeric = (int)(($___mysqli_tmp->type <= MYSQLI_TYPE_INT24) || ($___mysqli_tmp->type == MYSQLI_TYPE_YEAR) || ((defined("MYSQLI_TYPE_NEWDECIMAL")) ? ($___mysqli_tmp->type == MYSQLI_TYPE_NEWDECIMAL) : 0)))) && (!is_null($___mysqli_tmp->blob = (int)in_array($___mysqli_tmp->type, array(MYSQLI_TYPE_TINY_BLOB, MYSQLI_TYPE_BLOB, MYSQLI_TYPE_MEDIUM_BLOB, MYSQLI_TYPE_LONG_BLOB)))) && (!is_null($___mysqli_tmp->unsigned = ($___mysqli_tmp->flags & MYSQLI_UNSIGNED_FLAG) ? 1 : 0)) && (!is_null($___mysqli_tmp->zerofill = ($___mysqli_tmp->flags & MYSQLI_ZEROFILL_FLAG) ? 1 : 0)) && (!is_null($___mysqli_type = $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = (($___mysqli_type == MYSQLI_TYPE_STRING) || ($___mysqli_type == MYSQLI_TYPE_VAR_STRING)) ? "type" : "")) &&(!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && in_array($___mysqli_type, array(MYSQLI_TYPE_TINY, MYSQLI_TYPE_SHORT, MYSQLI_TYPE_LONG, MYSQLI_TYPE_LONGLONG, MYSQLI_TYPE_INT24))) ? "int" : $___mysqli_tmp->type)) &&(!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && in_array($___mysqli_type, array(MYSQLI_TYPE_FLOAT, MYSQLI_TYPE_DOUBLE, MYSQLI_TYPE_DECIMAL, ((defined("MYSQLI_TYPE_NEWDECIMAL")) ? constant("MYSQLI_TYPE_NEWDECIMAL") : -1)))) ? "real" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && $___mysqli_type == MYSQLI_TYPE_TIMESTAMP) ? "timestamp" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && $___mysqli_type == MYSQLI_TYPE_YEAR) ? "year" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && (($___mysqli_type == MYSQLI_TYPE_DATE) || ($___mysqli_type == MYSQLI_TYPE_NEWDATE))) ? "date " : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && $___mysqli_type == MYSQLI_TYPE_TIME) ? "time" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && $___mysqli_type == MYSQLI_TYPE_SET) ? "set" : $___mysqli_tmp->type)) &&(!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && $___mysqli_type == MYSQLI_TYPE_ENUM) ? "enum" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && $___mysqli_type == MYSQLI_TYPE_GEOMETRY) ? "geometry" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && $___mysqli_type == MYSQLI_TYPE_DATETIME) ? "datetime" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && (in_array($___mysqli_type, array(MYSQLI_TYPE_TINY_BLOB, MYSQLI_TYPE_BLOB, MYSQLI_TYPE_MEDIUM_BLOB, MYSQLI_TYPE_LONG_BLOB)))) ? "blob" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type && $___mysqli_type == MYSQLI_TYPE_NULL) ? "null" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->type = ("" == $___mysqli_tmp->type) ? "unknown" : $___mysqli_tmp->type)) && (!is_null($___mysqli_tmp->not_null = ($___mysqli_tmp->flags & MYSQLI_NOT_NULL_FLAG) ? 1 : 0)) ) : false ) ? $___mysqli_tmp : false))
 		{
 			$field_names[] = $field->name;
 		}
@@ -84,7 +84,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	function field_data()
 	{
 		$retval = array();
-		while ($field = mysql_fetch_object($this->result_id))
+		while ($field = mysqli_fetch_object($this->result_id))
 		{
 			preg_match('/([a-zA-Z]+)(\(\d+\))?/', $field->Type, $matches);
 
@@ -115,7 +115,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	{
 		if (is_resource($this->result_id))
 		{
-			mysql_free_result($this->result_id);
+			((mysqli_free_result($this->result_id) || (is_object($this->result_id) && (get_class($this->result_id) == "mysqli_result"))) ? true : false);
 			$this->result_id = FALSE;
 		}
 	}
@@ -134,7 +134,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	function _data_seek($n = 0)
 	{
-		return mysql_data_seek($this->result_id, $n);
+		return mysqli_data_seek($this->result_id,  $n);
 	}
 
 	// --------------------------------------------------------------------
@@ -149,7 +149,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	function _fetch_assoc()
 	{
-		return mysql_fetch_assoc($this->result_id);
+		return mysqli_fetch_assoc($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -164,7 +164,7 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 */
 	function _fetch_object()
 	{
-		return mysql_fetch_object($this->result_id);
+		return mysqli_fetch_object($this->result_id);
 	}
 
 }
